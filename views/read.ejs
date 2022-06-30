@@ -1,0 +1,61 @@
+<%-include("header")-%>
+
+<body>
+  <main role="main" class="container">
+    <h1 class="mt-5">Welcome to the CRUD app!</h1>
+    <p class="lead">
+      You can create,read, update or delete entries from the following table.
+    </p>
+  </main>
+
+
+ 
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%listItems.forEach(function(item){%>
+      <tr>
+        <td><%=item._id%></td>
+        <td><%=item.title%></td>
+        <td><%=item.description%></td>
+        <td><%=item.status%></td>
+        <td>
+          <a href="/update/<%=item._id%>" class="link-secondary">Update</a>
+          <!-- <form action="/delete" method="post"> -->
+          <a
+              class=" delete"
+              data-doc="<%=item._id%>"
+              >
+              Delete</a>
+          </td>
+      </tr>
+      <%})%>
+    </tbody>
+  </table>
+
+  <script> 
+  const trash = document.querySelector(`a.delete`);
+  trash.addEventListener("click",async(e) =>{
+    const endpoint = `http://localhost:8000/delete/${trash.dataset.doc}`;
+     const p = await fetch(endpoint,{
+      method:`DELETE`  
+    })
+    console.log(p)
+    if(p.status === 200){
+      window.location.href = "/"
+    }
+    else{
+      alert("Delete operation not success")
+    }
+  })
+  </script>
+
+<%-include("footer")-%>

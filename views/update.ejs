@@ -1,0 +1,48 @@
+<%-include("header")-%>
+
+<body>
+<main role="main" class="container" style ="padding: 60px 15px 0;">
+  <h1 class="mt-5">You can update the item here!</h1>
+  <p class="lead">
+    Let's do the changes now.
+  </p>
+</main>
+
+
+<form style = "width:60%; margin-left:97px" action="/update/<%=item._id%>" method="post">
+  <div class="form-group">
+    <label >Title</label>
+    <input
+      type="text"
+      name="listTitle"
+      value="<%=item.title%>"
+      autocomplete="off"
+      class="form-control" id="exampleFormControlInput1"
+    />
+    
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input
+      type="text"
+      name="listDesc"
+      value="<%=item.description%>"
+      autocomplete="off"
+      class="form-control" id="exampleFormControlInput1"
+    />
+  </div>
+  
+  <div class="form-group">
+    <label >Select status</label>
+    <select value = "<%item.status%>"name = "listStatus" class="form-control" id="exampleFormControlSelect1" placeholder="Enter status">
+      <option>Not started</option>
+      <option>In progress</option>
+      <option>Done</option>
+    </select>
+  </div>
+  <button style = "margin-top: 20px" type="submit" name="button" class=" btn btn-outline-secondary">Submit</button>
+</form>
+</body>
+
+
+
